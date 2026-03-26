@@ -13,6 +13,7 @@ builder.WebHost.UseUrls($"http://+:{port}");
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 // Add Scoped Services
 builder.Services.AddScoped<IDownloadService, DownloadService>();
@@ -43,6 +44,13 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
+
+// Enable Swagger UI in both Development and Production for Render testing
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "SnapGrab API V1");
+});
 
 // Serve static files (React app + downloads)
 app.UseStaticFiles();
