@@ -360,7 +360,7 @@ export default function Home() {
                   <div style={{ fontWeight: 700, fontSize: '1.05rem' }}>{result.message}</div>
                   {result.success && result.fileUrl && (
                     <div style={{ marginTop: '0.75rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                      <a href={result.fileUrl} download className="clay-btn clay-btn-success" id="save-file-btn" style={{ display: 'inline-flex', textDecoration: 'none' }}>
+                      <a href={result.fileUrl} target="_blank" rel="noopener noreferrer" className="clay-btn clay-btn-success" id="save-file-btn" style={{ display: 'inline-flex', textDecoration: 'none' }}>
                         <Download size={18} /> Save File
                       </a>
                       <button className="clay-btn clay-btn-secondary" onClick={handleReset} style={{ display: 'inline-flex' }}>

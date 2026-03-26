@@ -194,7 +194,7 @@ export default function Dashboard() {
               <div style={{ fontWeight: 700, fontSize: '1.05rem' }}>{result.message}</div>
               {result.success && result.fileUrl && (
                 <div style={{ marginTop: '0.75rem' }}>
-                  <a href={result.fileUrl} download className="clay-btn clay-btn-success" id="admin-save-btn" style={{ display: 'inline-flex', textDecoration: 'none' }}>
+                  <a href={result.fileUrl} target="_blank" rel="noopener noreferrer" className="clay-btn clay-btn-success" id="admin-save-btn" style={{ display: 'inline-flex', textDecoration: 'none' }}>
                     <Download size={18} /> Save File
                   </a>
                 </div>
