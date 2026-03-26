@@ -39,6 +39,9 @@ RUN apt-get update && \
 # Copy published .NET app
 COPY --from=backend-build /app/publish ./
 
+# Copy cookies file to bypass bot detection
+COPY cookies.txt ./
+
 # Copy built frontend into wwwroot
 COPY --from=frontend-build /app/frontend/dist ./wwwroot/
 
