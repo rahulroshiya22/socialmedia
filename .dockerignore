@@ -1,0 +1,14 @@
+**/node_modules
+**/dist
+**/bin
+**/obj
+**/.git
+**/.vs
+**/.vscode
+**/.idea
+**/wwwroot/downloads/*
+binaries/
+*.exe
+*.user
+*.suo
+.env

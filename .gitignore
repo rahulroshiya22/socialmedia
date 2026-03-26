@@ -1,0 +1,29 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# IDE
+.vs/
+.vscode/
+.idea/
+
+# Downloads
+wwwroot/downloads/*
+!wwwroot/downloads/.gitkeep
+
+# Windows binaries (not needed in Docker/Linux)
+binaries/*.exe
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Env
+.env
+*.env.local
