@@ -88,6 +88,7 @@ public class DownloadService : IDownloadService
             {
                 "--dump-json",
                 "--no-playlist",
+                "--geo-bypass-country", "IN",
                 $"\"{url}\""
             };
 
@@ -231,6 +232,7 @@ public class DownloadService : IDownloadService
                 "--no-playlist",
                 "--newline",
                 "--concurrent-fragments", "8",
+                "--geo-bypass-country", "IN",
                 "--format", formatArg,
                 $"\"{url}\""
             };
@@ -361,6 +363,7 @@ public class DownloadService : IDownloadService
                 "-o", $"\"{outputPath}\"",
                 "--no-playlist",
                 "--concurrent-fragments", "8",
+                "--geo-bypass-country", "IN",
                 "--format", formatArg,
                 $"\"{url}\""
             };
