@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Download, LogOut, Link as LinkIcon, AlertCircle, Check, Activity, Zap, Shield, Wrench, HardDrive, Film, Music } from 'lucide-react';
+import { Download, LogOut, Link as LinkIcon, AlertCircle, Check, Activity, Zap, Shield, Wrench, HardDrive, Film, Music, Copy, ExternalLink } from 'lucide-react';
 
 export default function Dashboard() {
   const [url, setUrl] = useState('');
@@ -191,14 +191,33 @@ export default function Dashboard() {
               {result.success ? <Check size={20} /> : <AlertCircle size={20} />}
             </div>
             <div style={{ flex: 1 }}>
-              <div style={{ fontWeight: 700, fontSize: '1.05rem' }}>{result.message}</div>
-              {result.success && result.fileUrl && (
-                <div style={{ marginTop: '0.75rem' }}>
-                  <a href={result.fileUrl} target="_blank" rel="noopener noreferrer" className="clay-btn clay-btn-success" id="admin-save-btn" style={{ display: 'inline-flex', textDecoration: 'none' }}>
-                    <Download size={18} /> Save File
-                  </a>
-                </div>
-              )}
+                  <div style={{ fontWeight: 700, fontSize: '1.05rem' }}>{result.message}</div>
+                  {result.success && result.fileUrl && (
+                    <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                      <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                        <input 
+                          type="text" 
+                          readOnly 
+                          value={`${window.location.origin}${result.fileUrl}`} 
+                          className="clay-input" 
+                          style={{ flex: 1, padding: '0.6rem 1rem', fontSize: '0.9rem', backgroundColor: 'var(--warm-gray-50)', color: 'var(--warm-gray-600)' }} 
+                        />
+                        <button 
+                          className="clay-btn clay-btn-primary" 
+                          onClick={() => navigator.clipboard.writeText(`${window.location.origin}${result.fileUrl}`)}
+                          style={{ display: 'inline-flex', padding: '0.6rem 1rem' }}
+                          title="Copy Link"
+                        >
+                          <Copy size={16} />
+                        </button>
+                      </div>
+                      <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                        <a href={result.fileUrl} target="_blank" rel="noopener noreferrer" className="clay-btn clay-btn-success" style={{ display: 'inline-flex', textDecoration: 'none' }}>
+                          <ExternalLink size={18} /> Open Video
+                        </a>
+                      </div>
+                    </div>
+                  )}
             </div>
           </div>
         </div>

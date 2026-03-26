@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
-import { Download, Link as LinkIcon, Zap, Check, AlertCircle, Search, Film, Music, HardDrive } from 'lucide-react';
+import { Download, Link as LinkIcon, Zap, Check, AlertCircle, Search, Film, Music, HardDrive, Copy, ExternalLink } from 'lucide-react';
 
 /* ═══════ REAL SVG PLATFORM ICONS ═══════ */
 const YoutubeIcon = () => (
@@ -359,13 +359,32 @@ export default function Home() {
                 <div style={{ flex: 1 }}>
                   <div style={{ fontWeight: 700, fontSize: '1.05rem' }}>{result.message}</div>
                   {result.success && result.fileUrl && (
-                    <div style={{ marginTop: '0.75rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                      <a href={result.fileUrl} target="_blank" rel="noopener noreferrer" className="clay-btn clay-btn-success" id="save-file-btn" style={{ display: 'inline-flex', textDecoration: 'none' }}>
-                        <Download size={18} /> Save File
-                      </a>
-                      <button className="clay-btn clay-btn-secondary" onClick={handleReset} style={{ display: 'inline-flex' }}>
-                        Download Another
-                      </button>
+                    <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                      <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                        <input 
+                          type="text" 
+                          readOnly 
+                          value={`${window.location.origin}${result.fileUrl}`} 
+                          className="clay-input" 
+                          style={{ flex: 1, padding: '0.6rem 1rem', fontSize: '0.9rem', backgroundColor: 'var(--warm-gray-50)', color: 'var(--warm-gray-600)' }} 
+                        />
+                        <button 
+                          className="clay-btn clay-btn-primary" 
+                          onClick={() => navigator.clipboard.writeText(`${window.location.origin}${result.fileUrl}`)}
+                          style={{ display: 'inline-flex', padding: '0.6rem 1rem' }}
+                          title="Copy Link"
+                        >
+                          <Copy size={16} />
+                        </button>
+                      </div>
+                      <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                        <a href={result.fileUrl} target="_blank" rel="noopener noreferrer" className="clay-btn clay-btn-success" style={{ display: 'inline-flex', textDecoration: 'none' }}>
+                          <ExternalLink size={18} /> Open Video
+                        </a>
+                        <button className="clay-btn clay-btn-secondary" onClick={handleReset} style={{ display: 'inline-flex' }}>
+                          Download Another
+                        </button>
+                      </div>
                     </div>
                   )}
                   {!result.success && (
