@@ -65,6 +65,16 @@ public class DownloadService : IDownloadService
         return null;
     }
 
+    private void AddCookiesIfAvailable(List<string> arguments)
+    {
+        var cookiesFile = Path.Combine(Directory.GetCurrentDirectory(), "cookies.txt");
+        if (File.Exists(cookiesFile))
+        {
+            arguments.Add("--cookies");
+            arguments.Add($"\"{cookiesFile}\"");
+        }
+    }
+
     public async Task<VideoInfoResponse> FetchVideoInfoAsync(string url)
     {
         if (string.IsNullOrWhiteSpace(url))
@@ -87,6 +97,8 @@ public class DownloadService : IDownloadService
                 arguments.Insert(0, "--proxy");
                 arguments.Insert(1, $"\"{proxy}\"");
             }
+
+            AddCookiesIfAvailable(arguments);
 
             var result = await Cli.Wrap(_ytDlpPath)
                 .WithArguments(string.Join(" ", arguments))
@@ -230,6 +242,8 @@ public class DownloadService : IDownloadService
                 arguments.Insert(1, $"\"{proxy}\"");
             }
 
+            AddCookiesIfAvailable(arguments);
+
             var progressRegex = new Regex(@"\[download\]\s+(\d+\.?\d*)%\s+of.*?at\s+(\S+)\s+ETA\s+(\S+)");
             var mergeRegex = new Regex(@"\[Merger\]|Merging");
 
@@ -357,6 +371,8 @@ public class DownloadService : IDownloadService
                 arguments.Insert(0, "--proxy");
                 arguments.Insert(1, $"\"{proxy}\"");
             }
+
+            AddCookiesIfAvailable(arguments);
 
             var result = await Cli.Wrap(_ytDlpPath)
                 .WithArguments(string.Join(" ", arguments))
