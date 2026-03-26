@@ -18,6 +18,9 @@ builder.Services.AddSwaggerGen();
 // Add Scoped Services
 builder.Services.AddScoped<IDownloadService, DownloadService>();
 
+// Add Background Services (Keep Render awake)
+builder.Services.AddHostedService<KeepAliveService>();
+
 // Add JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var secretKey = jwtSettings["Key"];
